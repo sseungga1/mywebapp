@@ -6,8 +6,8 @@ import random
 # 페이지 설정
 # --------------------------------------------------
 st.set_page_config(
-    page_title="MBTI 여행지 추천소 💗",
-    page_icon="🧳",
+    page_title="별자리 여행지 추천소 💫",
+    page_icon="🌙",
     layout="centered"
 )
 
@@ -16,279 +16,256 @@ st.set_page_config(
 # --------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-    .stApp {
-        background: linear-gradient(180deg, #fff5fa 0%, #fffaff 50%, #f7f9ff 100%);
-    }
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Noto Sans KR', sans-serif;
-    }
+.stApp {
+    background:
+        radial-gradient(circle at 10% 10%, #ffe4f0 0, transparent 25%),
+        radial-gradient(circle at 90% 20%, #e9ddff 0, transparent 25%),
+        linear-gradient(180deg, #fff7fb 0%, #faf8ff 100%);
+}
 
-    .main-title {
-        text-align: center;
-        font-family: 'Jua', sans-serif;
-        font-size: 42px;
-        color: #ff7fa8;
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
+html, body, [class*="css"] {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
-    .sub-title {
-        text-align: center;
-        color: #9b8f98;
-        font-size: 16px;
-        margin-bottom: 30px;
-    }
+/* 메인 제목 */
+.main-title {
+    text-align: center;
+    font-family: 'Jua', sans-serif;
+    font-size: 44px;
+    color: #ef82aa;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
 
-    .cute-box {
-        background: rgba(255,255,255,0.85);
-        border: 2px solid #ffd6e5;
-        border-radius: 25px;
-        padding: 25px;
-        box-shadow: 0 8px 25px rgba(255, 160, 190, 0.12);
-        margin-bottom: 20px;
-    }
+.sub-title {
+    text-align: center;
+    color: #9b8fa0;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
 
-    .mbti-badge {
-        display: inline-block;
-        background: #ffe1ec;
-        color: #ed6895;
-        border-radius: 20px;
-        padding: 7px 16px;
-        font-weight: 700;
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
+/* 귀여운 박스 */
+.cute-box {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #f7d8e7;
+    border-radius: 28px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(190, 130, 170, 0.10);
+}
 
-    .destination-card {
-        background: white;
-        border-radius: 25px;
-        padding: 24px;
-        margin: 15px 0;
-        border: 1.5px solid #f4dce7;
-        box-shadow: 0 6px 20px rgba(100, 70, 100, 0.08);
-    }
+/* 별자리 뱃지 */
+.zodiac-badge {
+    display: inline-block;
+    background: #f3e8ff;
+    color: #8b70ad;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-weight: 700;
+    font-size: 14px;
+}
 
-    .destination-title {
-        font-family: 'Jua', sans-serif;
-        font-size: 25px;
-        color: #59506b;
-        margin-bottom: 8px;
-    }
+/* 결과 카드 */
+.destination-card {
+    background: white;
+    border: 1.5px solid #f1dfe9;
+    border-radius: 26px;
+    padding: 24px;
+    margin: 16px 0;
+    box-shadow: 0 7px 22px rgba(100, 80, 110, 0.08);
+}
 
-    .reason {
-        color: #77717b;
-        line-height: 1.7;
-        font-size: 15px;
-    }
+.destination-title {
+    font-family: 'Jua', sans-serif;
+    color: #62576e;
+    font-size: 27px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
 
-    .tag {
-        display: inline-block;
-        background: #f4efff;
-        color: #8a70b5;
-        border-radius: 15px;
-        padding: 5px 11px;
-        margin: 3px;
-        font-size: 12px;
-    }
+.reason {
+    color: #77717c;
+    font-size: 15px;
+    line-height: 1.8;
+}
 
-    .footer {
-        text-align: center;
-        color: #aaa0aa;
-        font-size: 13px;
-        margin-top: 35px;
-        padding-bottom: 20px;
-    }
+.tag {
+    display: inline-block;
+    background: #fff0f6;
+    color: #d5799d;
+    border-radius: 15px;
+    padding: 5px 11px;
+    margin: 3px;
+    font-size: 12px;
+}
 
-    div.stButton > button {
-        width: 100%;
-        border-radius: 20px;
-        border: none;
-        background: linear-gradient(90deg, #ff9fbd, #c7a8f9);
-        color: white;
-        font-size: 18px;
-        font-weight: 700;
-        padding: 12px;
-        transition: 0.2s;
-    }
+/* 추천 버튼 */
+div.stButton > button {
+    width: 100%;
+    border: none;
+    border-radius: 22px;
+    background: linear-gradient(90deg, #ff9fbd, #bfa5f5);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 13px;
+}
 
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 7px 15px rgba(210, 150, 200, 0.25);
-    }
+div.stButton > button:hover {
+    box-shadow: 0 8px 20px rgba(190, 140, 200, 0.25);
+    transform: translateY(-2px);
+}
 
-    .stSelectbox label {
-        color: #665b68;
-        font-weight: 700;
-    }
+/* Footer */
+.footer {
+    text-align: center;
+    color: #aaa1ad;
+    font-size: 13px;
+    margin-top: 35px;
+    padding-bottom: 20px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
 
 # --------------------------------------------------
-# 여행지 데이터
+# 별자리 데이터
 # --------------------------------------------------
-travel_data = {
+zodiac_data = {
 
-    "INFP": {
-        "nickname": "몽글몽글 감성 여행자 🌷",
-        "description": "조용한 골목을 걷고 예쁜 카페에서 천천히 쉬는 여행을 좋아해요.",
+    "♈ 양자리 (3/21 ~ 4/19)": {
+        "name": "양자리",
+        "nickname": "두근두근 모험가 🔥",
+        "description": "새로운 경험과 짜릿한 활동을 좋아하는 에너지 넘치는 여행자예요!",
         "places": [
-            ("교토 🇯🇵", "고즈넉한 골목과 작은 찻집을 천천히 둘러보며 감성을 충전하기 좋아요.", ["감성", "카페", "산책"]),
-            ("제주도 🇰🇷", "바다를 바라보며 여유롭게 걷고 자연 속에서 마음을 쉬게 하기 좋은 곳이에요.", ["자연", "힐링", "바다"]),
-            ("프라하 🇨🇿", "동화 같은 건물과 골목길을 걸으며 나만의 여행 이야기를 만들기 좋아요.", ["동화", "사진", "산책"])
+            ("부산 🇰🇷", "바다부터 액티비티까지 다양한 활동을 즐길 수 있어서 양자리의 에너지와 잘 어울려요.", ["액티비티", "바다", "맛집"]),
+            ("방콕 🇹🇭", "야시장과 맛집, 다양한 체험까지 지루할 틈 없이 신나는 여행을 즐길 수 있어요.", ["모험", "야시장", "먹방"]),
+            ("퀸스타운 🇳🇿", "아름다운 자연 속에서 다양한 야외 활동을 즐길 수 있는 모험 여행지예요.", ["자연", "모험", "액티비티"])
         ]
     },
 
-    "INFJ": {
-        "nickname": "조용한 여행 설계자 🌙",
-        "description": "사람이 너무 붐비지 않으면서 의미 있는 장소를 좋아해요.",
+    "♉ 황소자리 (4/20 ~ 5/20)": {
+        "name": "황소자리",
+        "nickname": "느긋한 행복 여행자 🍰",
+        "description": "맛있는 음식과 편안한 분위기, 아름다운 공간에서 천천히 쉬는 걸 좋아해요.",
         "places": [
-            ("교토 🇯🇵", "역사와 문화가 살아 있는 공간에서 천천히 생각을 정리하기 좋아요.", ["문화", "역사", "힐링"]),
-            ("스위스 🇨🇭", "웅장한 자연 속에서 복잡한 생각을 내려놓고 휴식하기 좋아요.", ["자연", "힐링", "풍경"]),
-            ("경주 🇰🇷", "역사적인 장소를 둘러보며 조용하고 깊이 있는 여행을 즐길 수 있어요.", ["역사", "문화", "산책"])
+            ("후쿠오카 🇯🇵", "맛있는 음식과 아기자기한 카페를 여유롭게 즐기기 좋아요.", ["맛집", "카페", "여유"]),
+            ("제주도 🇰🇷", "아름다운 자연과 맛있는 음식, 편안한 숙소에서 느긋하게 쉬기 좋아요.", ["힐링", "자연", "맛집"]),
+            ("파리 🇫🇷", "예쁜 카페에서 디저트를 즐기고 아름다운 거리를 천천히 걷기 좋아요.", ["디저트", "카페", "감성"])
         ]
     },
 
-    "ENFP": {
-        "nickname": "두근두근 모험 여행자 🎀",
-        "description": "새로운 경험과 맛있는 음식, 재미있는 사람들을 만나는 걸 좋아해요.",
+    "♊ 쌍둥이자리 (5/21 ~ 6/20)": {
+        "name": "쌍둥이자리",
+        "nickname": "호기심 가득 탐험가 💬",
+        "description": "새로운 장소와 재미있는 이야기를 찾아다니는 것을 좋아해요.",
         "places": [
-            ("방콕 🇹🇭", "맛있는 음식부터 야시장, 쇼핑까지 다양한 경험을 한 번에 즐길 수 있어요.", ["맛집", "쇼핑", "활동"]),
-            ("오사카 🇯🇵", "먹거리와 볼거리가 많아서 즉흥적으로 돌아다니기 딱 좋아요.", ["먹방", "도시", "재미"]),
-            ("부산 🇰🇷", "바다와 맛집, 카페, 액티비티까지 다양하게 즐길 수 있어요.", ["바다", "맛집", "카페"])
+            ("도쿄 🇯🇵", "전통문화부터 최신 유행까지 다양한 모습을 한 번에 경험할 수 있어요.", ["트렌드", "문화", "도시"]),
+            ("런던 🇬🇧", "박물관과 거리, 쇼핑 등 다양한 콘텐츠를 골고루 즐길 수 있어요.", ["문화", "박물관", "쇼핑"]),
+            ("서울 🇰🇷", "카페, 전시, 쇼핑, 맛집 등 새로운 것을 발견할 곳이 정말 많아요.", ["카페", "전시", "쇼핑"])
         ]
     },
 
-    "ENFJ": {
-        "nickname": "사람 좋아하는 여행 리더 💕",
-        "description": "친구들과 함께 추억을 만들고 다양한 체험을 하는 여행이 잘 맞아요.",
+    "♋ 게자리 (6/21 ~ 7/22)": {
+        "name": "게자리",
+        "nickname": "포근포근 힐링 여행자 🐚",
+        "description": "편안하고 따뜻한 분위기에서 소중한 사람들과 추억을 만드는 여행을 좋아해요.",
         "places": [
-            ("파리 🇫🇷", "친구들과 예쁜 장소를 구경하고 맛있는 음식을 먹으며 추억을 만들기 좋아요.", ["사진", "문화", "맛집"]),
-            ("싱가포르 🇸🇬", "깔끔하고 다양한 볼거리 덕분에 함께 여행하기 편하고 즐거워요.", ["도시", "관광", "맛집"]),
-            ("서울 🇰🇷", "카페부터 쇼핑, 전시, 맛집까지 친구들과 함께 할 일이 정말 많아요.", ["카페", "쇼핑", "전시"])
+            ("제주도 🇰🇷", "잔잔한 바다와 자연 속에서 가족이나 친구와 편안한 시간을 보내기 좋아요.", ["가족", "힐링", "바다"]),
+            ("경주 🇰🇷", "조용한 분위기에서 역사적인 장소를 둘러보며 여유를 즐길 수 있어요.", ["역사", "산책", "힐링"]),
+            ("다낭 🇻🇳", "따뜻한 날씨와 바다를 즐기며 느긋하게 쉬기 좋은 곳이에요.", ["휴양", "바다", "여유"])
         ]
     },
 
-    "INTP": {
-        "nickname": "호기심 가득 탐구 여행자 🔬",
-        "description": "평범한 관광보다 독특한 장소와 새로운 지식을 발견하는 걸 좋아해요.",
+    "♌ 사자자리 (7/23 ~ 8/22)": {
+        "name": "사자자리",
+        "nickname": "반짝반짝 주인공 여행자 👑",
+        "description": "멋진 장소에서 특별한 추억을 만들고 예쁜 사진을 남기는 걸 좋아해요.",
         "places": [
-            ("도쿄 🇯🇵", "과학관, 전자상가, 독특한 문화 공간 등 호기심을 자극하는 곳이 많아요.", ["과학", "도시", "탐험"]),
-            ("런던 🇬🇧", "박물관과 역사적인 장소를 돌아다니며 새로운 지식을 얻기 좋아요.", ["박물관", "역사", "문화"]),
-            ("싱가포르 🇸🇬", "미래적인 도시와 과학·기술 관련 볼거리가 많아 탐구심을 자극해요.", ["과학", "미래", "도시"])
+            ("파리 🇫🇷", "아름다운 랜드마크와 감성적인 거리가 많아 특별한 여행 사진을 남기기 좋아요.", ["사진", "랜드마크", "감성"]),
+            ("뉴욕 🇺🇸", "화려하고 에너지 넘치는 도시에서 주인공처럼 여행을 즐길 수 있어요.", ["도시", "쇼핑", "문화"]),
+            ("두바이 🇦🇪", "화려한 건축물과 특별한 경험으로 색다른 여행 추억을 만들 수 있어요.", ["럭셔리", "건축", "사진"])
         ]
     },
 
-    "INTJ": {
-        "nickname": "완벽주의 여행 전략가 🖤",
-        "description": "계획적으로 움직이면서도 남들과 다른 특별한 경험을 선호해요.",
+    "♍ 처녀자리 (8/23 ~ 9/22)": {
+        "name": "처녀자리",
+        "nickname": "꼼꼼한 계획 여행자 📖",
+        "description": "깔끔하고 체계적인 일정 속에서 알차게 여행하는 것을 좋아해요.",
         "places": [
-            ("스위스 🇨🇭", "교통과 일정이 비교적 체계적이고 아름다운 자연을 효율적으로 둘러볼 수 있어요.", ["계획", "자연", "풍경"]),
-            ("도쿄 🇯🇵", "효율적인 교통과 다양한 콘텐츠 덕분에 알찬 여행을 계획하기 좋아요.", ["도시", "효율", "문화"]),
-            ("싱가포르 🇸🇬", "깔끔한 도시 환경과 체계적인 관광 인프라가 여행 계획과 잘 맞아요.", ["깔끔", "도시", "계획"])
+            ("싱가포르 🇸🇬", "깔끔한 도시 환경과 체계적인 교통 덕분에 계획적인 여행을 하기 좋아요.", ["깔끔", "계획", "도시"]),
+            ("교토 🇯🇵", "차분하고 정돈된 분위기 속에서 역사와 문화를 천천히 둘러볼 수 있어요.", ["문화", "역사", "산책"]),
+            ("스위스 🇨🇭", "아름다운 자연과 편리한 교통 환경을 함께 즐길 수 있어요.", ["자연", "계획", "풍경"])
         ]
     },
 
-    "ENTP": {
-        "nickname": "아이디어 폭발 여행자 ⚡",
-        "description": "새로운 것, 특이한 것, 예상하지 못한 경험을 좋아해요.",
+    "♎ 천칭자리 (9/23 ~ 10/22)": {
+        "name": "천칭자리",
+        "nickname": "예쁜 것 가득 감성 여행자 🎀",
+        "description": "예쁜 공간과 맛있는 음식, 아름다운 풍경을 사랑하는 여행자예요.",
         "places": [
-            ("도쿄 🇯🇵", "전통과 최신 문화가 섞여 있어서 새로운 아이디어를 얻기 좋아요.", ["트렌드", "문화", "탐험"]),
-            ("뉴욕 🇺🇸", "다양한 문화와 사람, 독특한 장소가 모여 있어 지루할 틈이 없어요.", ["도시", "문화", "예술"]),
-            ("베를린 🇩🇪", "개성 있는 예술과 독특한 문화가 살아 있어서 색다른 경험을 할 수 있어요.", ["예술", "문화", "자유"])
+            ("파리 🇫🇷", "예쁜 거리와 카페, 건축물까지 감성을 가득 채울 수 있어요.", ["감성", "카페", "사진"]),
+            ("교토 🇯🇵", "전통적인 아름다움과 조용한 골목의 분위기를 즐기기 좋아요.", ["전통", "감성", "산책"]),
+            ("프라하 🇨🇿", "동화 속에 들어온 듯한 아름다운 건축물과 풍경을 만날 수 있어요.", ["동화", "사진", "풍경"])
         ]
     },
 
-    "ENTJ": {
-        "nickname": "당당한 여행 CEO 👑",
-        "description": "알찬 일정과 다양한 경험을 빠르게 즐기는 여행이 잘 맞아요.",
+    "♏ 전갈자리 (10/23 ~ 11/21)": {
+        "name": "전갈자리",
+        "nickname": "신비로운 탐험가 🌙",
+        "description": "남들이 잘 모르는 특별한 장소와 깊이 있는 경험을 좋아해요.",
         "places": [
-            ("뉴욕 🇺🇸", "도시의 에너지와 다양한 볼거리를 빠르게 경험하기 좋아요.", ["도시", "쇼핑", "문화"]),
-            ("싱가포르 🇸🇬", "짧은 시간에도 다양한 명소를 효율적으로 돌아볼 수 있어요.", ["효율", "도시", "관광"]),
-            ("도쿄 🇯🇵", "쇼핑, 음식, 문화, 관광까지 바쁜 일정을 꽉 채울 수 있어요.", ["쇼핑", "맛집", "도시"])
+            ("이스탄불 🇹🇷", "동양과 서양의 문화가 만나는 독특한 분위기와 역사적인 공간을 경험할 수 있어요.", ["역사", "문화", "탐험"]),
+            ("교토 🇯🇵", "오래된 전통과 고즈넉한 공간에서 깊이 있는 여행을 즐길 수 있어요.", ["전통", "역사", "감성"]),
+            ("아이슬란드 🇮🇸", "신비로운 자연 풍경을 보며 평소와 다른 특별한 경험을 할 수 있어요.", ["자연", "신비", "풍경"])
         ]
     },
 
-    "ISFP": {
-        "nickname": "말랑말랑 자유 여행자 🧸",
-        "description": "정해진 일정에 얽매이기보다 예쁜 풍경과 맛있는 것을 따라 움직이는 걸 좋아해요.",
+    "♐ 사수자리 (11/22 ~ 12/21)": {
+        "name": "사수자리",
+        "nickname": "자유로운 세계 여행자 🌎",
+        "description": "자유롭게 돌아다니면서 새로운 문화와 자연을 경험하는 것을 좋아해요.",
         "places": [
-            ("제주도 🇰🇷", "예쁜 바다와 카페를 따라 자유롭게 돌아다니기 좋아요.", ["바다", "카페", "자유"]),
-            ("다낭 🇻🇳", "따뜻한 날씨와 바다를 즐기면서 느긋하게 쉬기 좋아요.", ["휴양", "바다", "힐링"]),
-            ("후쿠오카 🇯🇵", "맛있는 음식과 아기자기한 공간을 부담 없이 즐길 수 있어요.", ["맛집", "카페", "여유"])
+            ("뉴질랜드 🇳🇿", "넓은 자연 속에서 자유롭게 여행하며 다양한 모험을 즐길 수 있어요.", ["자연", "자유", "모험"]),
+            ("호주 🇦🇺", "도시와 자연, 해변까지 다양한 경험을 한 번에 할 수 있어요.", ["여행", "자연", "바다"]),
+            ("태국 🇹🇭", "맛있는 음식과 아름다운 자연, 새로운 문화를 자유롭게 경험할 수 있어요.", ["문화", "맛집", "모험"])
         ]
     },
 
-    "ISFJ": {
-        "nickname": "포근포근 힐링 여행자 ☁️",
-        "description": "편안하고 안전하면서도 예쁜 장소에서 여유롭게 쉬는 걸 좋아해요.",
+    "♑ 염소자리 (12/22 ~ 1/19)": {
+        "name": "염소자리",
+        "nickname": "야무진 알찬 여행자 🧳",
+        "description": "계획을 세우고 목표한 곳을 하나씩 정복하는 여행을 좋아해요.",
         "places": [
-            ("제주도 🇰🇷", "아름다운 자연 속에서 무리하지 않고 편안하게 여행하기 좋아요.", ["힐링", "자연", "바다"]),
-            ("후쿠오카 🇯🇵", "맛있는 음식과 편안한 분위기를 함께 즐길 수 있어요.", ["맛집", "여유", "도시"]),
-            ("경주 🇰🇷", "조용한 분위기 속에서 문화와 자연을 함께 즐길 수 있어요.", ["역사", "산책", "힐링"])
+            ("도쿄 🇯🇵", "쇼핑과 맛집, 관광지를 계획적으로 돌아보며 알찬 여행을 만들 수 있어요.", ["계획", "쇼핑", "맛집"]),
+            ("싱가포르 🇸🇬", "주요 관광지를 효율적으로 돌아볼 수 있어 짧은 여행에도 잘 어울려요.", ["효율", "도시", "관광"]),
+            ("런던 🇬🇧", "역사적인 장소와 박물관을 체계적으로 둘러보며 알찬 여행을 할 수 있어요.", ["역사", "박물관", "문화"])
         ]
     },
 
-    "ESFP": {
-        "nickname": "반짝반짝 행복 여행자 ✨",
-        "description": "맛있는 음식과 예쁜 사진, 신나는 활동을 모두 놓치고 싶지 않아요!",
+    "♒ 물병자리 (1/20 ~ 2/18)": {
+        "name": "물병자리",
+        "nickname": "톡톡 튀는 독특한 여행자 💜",
+        "description": "남들과 조금 다른 특별하고 독특한 경험을 좋아해요.",
         "places": [
-            ("부산 🇰🇷", "바다, 맛집, 카페, 쇼핑까지 재미있는 요소가 가득해요.", ["바다", "맛집", "카페"]),
-            ("오사카 🇯🇵", "맛있는 음식과 활기찬 분위기를 마음껏 즐길 수 있어요.", ["먹방", "쇼핑", "도시"]),
-            ("방콕 🇹🇭", "야시장과 맛집, 쇼핑을 즐기며 신나는 여행을 할 수 있어요.", ["야시장", "맛집", "쇼핑"])
+            ("베를린 🇩🇪", "개성 넘치는 예술과 독특한 문화가 가득해서 새로운 영감을 받을 수 있어요.", ["예술", "문화", "개성"]),
+            ("도쿄 🇯🇵", "최신 기술과 독특한 문화가 공존해서 색다른 경험을 하기 좋아요.", ["미래", "트렌드", "문화"]),
+            ("레이캬비크 🇮🇸", "독특하고 신비로운 자연을 경험할 수 있는 특별한 여행지예요.", ["자연", "신비", "독특"])
         ]
     },
 
-    "ESFJ": {
-        "nickname": "다정다감 추억 여행자 💗",
-        "description": "친구나 가족과 함께 맛있는 것을 먹고 예쁜 곳에서 사진 찍는 걸 좋아해요.",
+    "♓ 물고기자리 (2/19 ~ 3/20)": {
+        "name": "물고기자리",
+        "nickname": "몽글몽글 감성 여행자 🫧",
+        "description": "아름다운 풍경을 바라보며 천천히 쉬고 감성을 충전하는 여행을 좋아해요.",
         "places": [
-            ("파리 🇫🇷", "예쁜 풍경과 맛있는 음식으로 함께 추억을 만들기 좋아요.", ["사진", "맛집", "감성"]),
-            ("부산 🇰🇷", "친구나 가족과 함께 즐길 수 있는 볼거리와 먹거리가 많아요.", ["가족", "맛집", "바다"]),
-            ("후쿠오카 🇯🇵", "가까운 거리에서 맛집과 쇼핑을 편하게 즐길 수 있어요.", ["맛집", "쇼핑", "여행"])
-        ]
-    },
-
-    "ISTP": {
-        "nickname": "쿨한 액티비티 여행자 🏄",
-        "description": "관광지만 구경하기보다 직접 움직이고 경험하는 걸 좋아해요.",
-        "places": [
-            ("다낭 🇻🇳", "바다와 다양한 액티비티를 부담 없이 즐길 수 있어요.", ["바다", "액티비티", "휴양"]),
-            ("제주도 🇰🇷", "드라이브와 자연 속 활동을 자유롭게 즐기기 좋아요.", ["드라이브", "자연", "활동"]),
-            ("퀸스타운 🇳🇿", "아름다운 자연 속에서 다양한 야외 활동을 즐길 수 있어요.", ["자연", "모험", "액티비티"])
-        ]
-    },
-
-    "ISTJ": {
-        "nickname": "차분한 계획 여행자 📚",
-        "description": "꼼꼼하게 계획하고 편안하게 여행하는 것을 좋아해요.",
-        "places": [
-            ("교토 🇯🇵", "정돈된 분위기와 역사적인 장소를 차분하게 둘러보기 좋아요.", ["역사", "문화", "산책"]),
-            ("스위스 🇨🇭", "아름다운 자연과 체계적인 여행 환경이 잘 어울려요.", ["자연", "계획", "풍경"]),
-            ("경주 🇰🇷", "역사와 문화가 잘 보존되어 있어 차분하게 여행하기 좋아요.", ["역사", "문화", "힐링"])
-        ]
-    },
-
-    "ESTP": {
-        "nickname": "짜릿짜릿 액션 여행자 🔥",
-        "description": "즉흥적인 재미와 새로운 경험을 좋아하는 에너지 넘치는 여행자예요.",
-        "places": [
-            ("방콕 🇹🇭", "맛집부터 야시장까지 하루를 꽉 채워 재미있게 즐길 수 있어요.", ["맛집", "야시장", "활동"]),
-            ("부산 🇰🇷", "바다와 액티비티, 맛집을 모두 즐길 수 있어요.", ["바다", "활동", "맛집"]),
-            ("싱가포르 🇸🇬", "도시 관광부터 다양한 체험까지 빠르게 즐기기 좋아요.", ["도시", "체험", "관광"])
-        ]
-    },
-
-    "ESTJ": {
-        "nickname": "똑부러진 여행 대장 🧳",
-        "description": "알찬 일정과 확실한 목적지가 있는 여행을 좋아해요.",
-        "places": [
-            ("도쿄 🇯🇵", "볼거리와 쇼핑, 맛집이 많아 알찬 일정을 만들기 좋아요.", ["쇼핑", "맛집", "도시"]),
-            ("싱가포르 🇸🇬", "주요 관광지를 효율적으로 둘러보기 좋은 여행지예요.", ["계획", "도시", "관광"]),
-            ("서울 🇰🇷", "짧은 시간에도 다양한 명소와 맛집을 효율적으로 즐길 수 있어요.", ["쇼핑", "맛집", "문화"])
+            ("제주도 🇰🇷", "푸른 바다와 자연을 바라보며 복잡한 생각을 내려놓고 쉬기 좋아요.", ["바다", "힐링", "감성"]),
+            ("프라하 🇨🇿", "동화 같은 풍경 속을 천천히 걸으며 감성을 충전하기 좋아요.", ["동화", "산책", "감성"]),
+            ("스위스 🇨🇭", "웅장하고 아름다운 자연을 바라보며 마음을 편안하게 만들 수 있어요.", ["자연", "풍경", "힐링"])
         ]
     }
 }
@@ -298,49 +275,52 @@ travel_data = {
 # 제목
 # --------------------------------------------------
 st.markdown(
-    '<div class="main-title">🧳 MBTI 여행지 추천소 💗</div>',
+    '<div class="main-title">🌙 별자리 여행지 추천소 ✨</div>',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    '<div class="sub-title">나의 MBTI와 찰떡궁합인 여행지는 어디일까? 🌷</div>',
+    '<div class="sub-title">나의 별자리와 찰떡궁합인 여행지는 어디일까? 💕</div>',
     unsafe_allow_html=True
 )
 
 
 # --------------------------------------------------
-# MBTI 선택
+# 별자리 선택
 # --------------------------------------------------
 st.markdown('<div class="cute-box">', unsafe_allow_html=True)
 
-st.markdown("### 💌 먼저 MBTI를 골라주세요!")
+st.markdown("### 💌 나의 별자리를 골라주세요!")
 
-mbti_list = list(travel_data.keys())
-
-mbti = st.selectbox(
-    "나의 MBTI",
-    mbti_list,
-    format_func=lambda x: f"{x}  ✨"
+zodiac = st.selectbox(
+    "별자리 선택",
+    list(zodiac_data.keys())
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --------------------------------------------------
-# 선택한 MBTI 정보
+# 별자리 성향
 # --------------------------------------------------
-info = travel_data[mbti]
+info = zodiac_data[zodiac]
 
 st.markdown(
     f"""
     <div class="cute-box">
-        <div class="mbti-badge">{mbti}</div>
-        <h2 style="color:#62566d; margin-bottom:5px;">
+
+        <div class="zodiac-badge">
+            {zodiac}
+        </div>
+
+        <h2 style="color:#62576e; margin-top:12px; margin-bottom:5px;">
             {info["nickname"]}
         </h2>
-        <p style="color:#77717b; line-height:1.7;">
+
+        <p style="color:#77717c; line-height:1.8;">
             {info["description"]}
         </p>
+
     </div>
     """,
     unsafe_allow_html=True
@@ -359,19 +339,19 @@ if st.button("💗 나에게 딱 맞는 여행지 추천받기 ✨"):
 
     st.markdown(
         f"""
-        <div style="
-            text-align:center;
-            margin:25px 0 20px 0;
-        ">
+        <div style="text-align:center; margin:28px 0 20px 0;">
+
             <h2 style="
                 font-family:'Jua', sans-serif;
-                color:#ff82aa;
+                color:#ed83aa;
             ">
-                🌸 {mbti}에게 추천하는 여행지 🌸
+                🌸 {info["name"]}에게 추천하는 여행지 🌸
             </h2>
+
             <p style="color:#999;">
-                당신의 여행 취향을 생각해서 골라봤어요!
+                별자리의 여행 성향을 생각해서 골라봤어요!
             </p>
+
         </div>
         """,
         unsafe_allow_html=True
@@ -387,12 +367,13 @@ if st.button("💗 나에게 딱 맞는 여행지 추천받기 ✨"):
         st.markdown(
             f"""
             <div class="destination-card">
+
                 <div style="
                     color:#ff9ab9;
                     font-size:13px;
                     font-weight:700;
                 ">
-                    RECOMMEND {i}
+                    ✨ RECOMMEND {i}
                 </div>
 
                 <div class="destination-title">
@@ -406,6 +387,7 @@ if st.button("💗 나에게 딱 맞는 여행지 추천받기 ✨"):
                 <div class="reason">
                     💌 {reason}
                 </div>
+
             </div>
             """,
             unsafe_allow_html=True
@@ -415,14 +397,15 @@ if st.button("💗 나에게 딱 맞는 여행지 추천받기 ✨"):
         """
         <div style="
             text-align:center;
-            background:#fff0f6;
-            border-radius:20px;
-            padding:18px;
+            background:linear-gradient(90deg,#fff0f7,#f5efff);
+            border-radius:23px;
+            padding:20px;
             margin-top:25px;
-            color:#9b7182;
+            color:#927789;
+            line-height:1.8;
         ">
-            🌷 여행은 어디로 가느냐보다<br>
-            <b>누구와 어떤 추억을 만드느냐</b>가 더 중요할지도 몰라요! 💕 
+            🌷 별이 알려주는 여행지는 참고만 해주세요!<br>
+            <b>가장 중요한 건 내가 즐거운 여행을 만드는 것</b>이에요 💕
         </div>
         """,
         unsafe_allow_html=True
@@ -435,9 +418,9 @@ if st.button("💗 나에게 딱 맞는 여행지 추천받기 ✨"):
 st.markdown(
     """
     <div class="footer">
-        made with 💗 for lovely travelers · MBTI Travel Finder
+        🌙 made with love for lovely travelers ✨<br>
+        Zodiac Travel Finder
     </div>
     """,
     unsafe_allow_html=True
 )
-
